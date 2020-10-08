@@ -155,9 +155,10 @@ def home():
     input_vector = np.zeros(len(symptoms_dict))
     symp = []
     symptoms = request.args.get("symptoms")
+    print(symptoms)
     if symptoms:
-        symptoms = symptoms.split(",")
-        # print(symptoms)
+        symptoms = symptoms.replace(' ', '').split(",")
+        print(symptoms)
         for symptom in symptoms:
             symp.append(symptoms_dict[symptom])
         input_vector[symp] = 1
@@ -185,6 +186,14 @@ def home():
     # return jsonify(response)
 
 
+@app.route("/info")
+def info():
+    string = "  blah, lots  ,  of ,  spaces, here "
+    mylist = string.replace(' ', '').split(',')
+    print(mylist)
+    return 'mylist'
+
+
 if __name__ == '__main__':
-    # app.run()
-    app.run(host="0.0.0.0", port=5002)
+    app.run()
+    # app.run(host="0.0.0.0", port=5002)
